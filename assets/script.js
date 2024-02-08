@@ -5,11 +5,8 @@ const marginTop = 150;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// ctx.fillStyle = "#ff0000";
-// //fill out the rectangle with a (x-coord, y-coord, width, height)
-// ctx.fillRect(30, 10, 10, 10);
-ctx.fillStyle = "#ff00ff";
-ctx.strokeStyle = "#ff00ff";
+ctx.fillStyle = "#33ff00";
+ctx.strokeStyle = "#33ff00";
 
 
 //converting the x coordinate and y coordinate as a properties in an object
@@ -37,6 +34,25 @@ function ballCollosion(ball)    {
     }
 }
 
+//function to create a ping-pong paddle
+function Paddle(pos,velocity, width, height) {
+  this.pos = pos;
+  this.velocity = velocity;
+  this.width = width;
+  this.height = height;
+
+  this.update = function() {
+  
+  }
+
+  //draw method to create a rectangle(paddle) that takes x-center, y-center, width, and height)
+  this.draw = function() {
+    ctx.fillStyle = "#33ff00";
+    ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+  }
+}
+
+
 //Ball class to create a ball that takes x and y coordinate position, velocity, and radius
 function Ball(pos, velocity, radius) {
   this.pos = pos;
@@ -62,16 +78,27 @@ function Ball(pos, velocity, radius) {
   };
 }
 
+//create a ball
 const ball = new Ball(vec2(150, 300), vec2(2, 2), 10);
+//create paddles on each sides
+const paddleLeft = new Paddle(vec2(0,50), vec2(5,5), 20, 100);
+//x-center should be width - 20 because it occupies 20 width of the canvas
+const paddleRight = new Paddle(vec2(canvas.width-20, 50), vec2(5,5), 20, 100);
 
-//function to update the ball position
+
+//function to update the ball and paddles position 
 function gameUpdate() {
   ball.update();
+  paddleLeft.update();
+  paddleRight.update();
   ballCollosion(ball);
 }
 
+//dynamically update the ball and paddle's position by updating its position
 function gameDraw() {
   ball.draw();
+  paddleLeft.draw();
+  paddleRight.draw();
 }
 
 //function to update the ball's position to implement the animation loop
