@@ -77,13 +77,24 @@ function Paddle(pos,velocity, width, height) {
     if(keyPressed[KeyDown]){
       this.pos.y += this.velocity.y;
     }
-
-  }
+  };
 
   //draw method to create a rectangle(paddle) that takes x-center, y-center, width, and height)
   this.draw = function() {
     ctx.fillStyle = "#33ff00";
     ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+  };
+  //method to get half width of the paddle
+  this.getHalfWidth = function() {
+    return this.width / 2;
+  };
+  //method to get half height of the paddle
+  this.getHalfHeight = function () {
+    return this.height / 2;
+  };
+  //method to get the center of the paddle
+  this.getCenter = function() {
+    return vec2(this.pos.x + this.getHalfWidth(), this.pos.y + this.getHalfHeight());
   }
 }
 
@@ -111,6 +122,17 @@ function Ball(pos, velocity, radius) {
     //draw the outline.
     ctx.stroke();
   };
+  
+};
+
+//function to implement a ball bouncing when it touches the paddle
+function ballPaddleCollision(ball, paddle) {
+  let dx = Math.abs(ball.pos.x - paddle.getCenter().x);
+  let dy = Math.abs(ball.pos.y - paddle.getCenter().y);
+
+  if (dx <= (ball.radius + paddle.getHalfWidth()) && dy <= (paddle.getHalfHeight() + ball.radius))  {
+    ball.velocity.x *= -1;
+  }
 }
 
 //create a ball
@@ -128,7 +150,8 @@ function gameUpdate() {
   paddleCollision(paddleLeft)
   //paddleRight.update();
   ballCollosion(ball);
-}
+  ballPaddleCollision(ball,paddleLeft);
+};
 
 //dynamically update the ball and paddle's position by updating its position
 function gameDraw() {
