@@ -8,6 +8,20 @@ canvas.height = window.innerHeight;
 ctx.fillStyle = "#33ff00";
 ctx.strokeStyle = "#33ff00";
 
+const keyPressed = [];
+//up-arrow
+const KeyUp = 38;
+//down-arrow
+const KeyDown = 40;
+
+//when a key is pressed, the keycode of the pressed key is stored in the 'keyPressed' array with a value of true
+window.addEventListener('keydown', function(e) {
+  keyPressed[e.keyCode] = true;
+});
+//when a key is released, the keycode of the corresponding key is stored in the 'keyPressed' array with a value of false
+window.addEventListener('keyup', function(e) {
+  keyPressed[e.keyCode] = false;
+});
 
 //converting the x coordinate and y coordinate as a properties in an object
 function vec2(x, y) {
@@ -34,6 +48,18 @@ function ballCollosion(ball)    {
     }
 }
 
+//function to handle the paddle movement range
+function paddleCollision(paddle)  {
+  //if the paddle touches the top, stay.
+  if (paddle.pos.y <= marginTop)  {
+    paddle.pos.y = marginTop;
+  }
+  //if the paddle touches the bottom, stay.
+  if (paddle.pos.y + paddle.height >= canvas.height)  {
+    paddle.pos.y = canvas.height - paddle.height;
+  }
+}
+
 //function to create a ping-pong paddle
 function Paddle(pos,velocity, width, height) {
   this.pos = pos;
@@ -41,8 +67,17 @@ function Paddle(pos,velocity, width, height) {
   this.width = width;
   this.height = height;
 
+  //method to move the ping pong paddle up and down
   this.update = function() {
-  
+    //when key up, move upward
+    if(keyPressed[KeyUp]){
+      this.pos.y -= this.velocity.y;
+    }
+    //when key down, move down
+    if(keyPressed[KeyDown]){
+      this.pos.y += this.velocity.y;
+    }
+
   }
 
   //draw method to create a rectangle(paddle) that takes x-center, y-center, width, and height)
@@ -90,7 +125,8 @@ const paddleRight = new Paddle(vec2(canvas.width-20, 50), vec2(5,5), 20, 100);
 function gameUpdate() {
   ball.update();
   paddleLeft.update();
-  paddleRight.update();
+  paddleCollision(paddleLeft)
+  //paddleRight.update();
   ballCollosion(ball);
 }
 
