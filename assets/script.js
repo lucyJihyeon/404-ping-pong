@@ -58,7 +58,9 @@ function paddleCollision(paddle) {
   if (paddle.pos.y + paddle.height >= canvas.height) {
     paddle.pos.y = canvas.height - paddle.height;
   }
-}
+};
+
+
 
 //function to create a ping-pong paddle
 function Paddle(pos, velocity, width, height) {
@@ -160,6 +162,7 @@ function gameUpdate() {
   ballCollosion(ball);
   ballPaddleCollision(ball, paddleLeft);
   player2AI(ball,paddleRight);
+  ballPaddleCollision(ball,paddleRight);
 }
 
 //dynamically update the ball and paddle's position by updating its position
