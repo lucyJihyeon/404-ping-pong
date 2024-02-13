@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-gradient {
+    @apply bg-gradient-to-r from-cyan-200 via-violet-600 to-blue-700;
+  }
+  .text-gradient {
+    @apply font-playpen text-center bg-gradient-to-b from-yellow-50 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  .nav-text {
+    @apply text-lg nav-text-gradient hover:text-sky-300;
+  }
+  .nav-text-gradient {
+    @apply font-playpen bg-gradient-to-b from-sky-100 via-sky-200 to-violet-900 bg-clip-text text-transparent;
+  }
+  .hamburger-menu-text-and-bg {
+    @apply p-4 text-lg font-playpen text-purple-800 hover:bg-gradient hover:text-blue-600 rounded;
+  }
+}
+
+/* DO  NOT TOUCH ABOVE CODE */
+
+footer {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: black;
+}
+.footer-container {
+  width: 100%;
+  padding: 70px 30px 20px;
+}
+.social-icon {
+  display: flex;
+  justify-content: center;
+}
+.social-icon a {
+  text-decoration: none;
+  padding: 10px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 50%;
+}
+.social-icon a i {
+  font-size: 2em;
+  color: black;
+  opacity: 0.9;
+}
+/*Hover effects on social icons*/
+.social-icon a:hover {
+  background-color: #111;
+  transition: 0.5s;
+}
+.social-icon a:hover i {
+  color: white;
+  transition: 0.5s;
+}
+.footernav {
+  margin: 30px 0;
+}
+.footernav ul {
+  display: flex;
+  justify-content: center;
+}
+.footernav ul li a {
+  color: white;
+  margin: 20px;
+  text-decoration: none;
+  font-size: 1.3em;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+.footernav ul li a:hover {
+  opacity: 1;
+}
+
+.footerBottom {
+  background-color: #000;
+  padding: 20px;
+  text-align: center;
+}
+.footerBottom p {
+  color: white;
+}
