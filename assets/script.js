@@ -28,7 +28,7 @@ function vec2(x, y) {
   return { x: x, y: y };
 }
 
-function ballCollosion(ball) {
+function ballCollision(ball) {
   //if the y coordinate of the bottom of the ball (the centerY + radius) touches the bottom side of the canvas, the ball moves upward
   if (ball.pos.y + ball.radius >= canvas.height) {
     //velocity has to be negative value because it is going upward
@@ -159,7 +159,7 @@ function gameUpdate() {
   paddleLeft.update();
   paddleCollision(paddleLeft);
   //paddleRight.update();
-  ballCollosion(ball);
+  ballCollision(ball);
   ballPaddleCollision(ball, paddleLeft);
   player2AI(ball,paddleRight);
   ballPaddleCollision(ball,paddleRight);
