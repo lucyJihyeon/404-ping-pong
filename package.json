@@ -1,0 +1,15 @@
+{
+  "name": "super-team-project",
+  "version": "1.0.0",
+  "description": "I enjoy JavaScript because it utilizes both Functional programming and Object-Oriented programming.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./style.css -o ./tailwindstyle.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.6"
+  }
+}
